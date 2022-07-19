@@ -18,13 +18,14 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         DB::table('users')->insert([
-            'name'=>'Raul',
-            'email'=>'raul@mail.com',
+            'name'=>'Carlos',
+            'email'=>'carlos@mail.com',
             'password'=>Hash::make('Abc@1234'),
             'phone'=>'3335554171',
             'card_id'=>'525389232333',
             'day_of_birth'=>Carbon::parse('2000-01-01'),
             'zipcode'=>553883,
+            'role'=>'admin'
         ]);
     }
 }
