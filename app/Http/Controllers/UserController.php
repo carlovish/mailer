@@ -29,7 +29,6 @@ class UserController extends Controller
                 return redirect()->route('admin.index');
             }
 
-            //SendEmail::dispatch('carlos.hechavaria@castel-afrique.com');
 
             $this->sendEmails($user);
 
