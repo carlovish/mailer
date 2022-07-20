@@ -63,7 +63,6 @@
                         name="phone"
                         id="phone"
                         v-model="form.phone"
-                       
                     />
                 </div>
 
@@ -90,17 +89,44 @@
                         required
                     />
                 </div>
+                <div class="form-group">
+                    <label for="country">Country</label>
+                    <select
+                        name="country"
+                        id="country"
+                        class="form-control"
+                        required
+                        @change="onChangeCountry($event)"
+                        v-model="form.country_id"
+                    >
+                        <option value="0">SELECT A COUNTRY</option>
+                        <option
+                            v-for="country of countries"
+                            :key="country.id"
+                            :value="country.id"
+                        >
+                            {{ country.name }}
+                        </option>
+                    </select>
+                </div>
 
                 <div class="form-group">
-                    <label for="zipcode">City Code</label>
-                    <input
-                        type="number"
+                    <label for="state">State</label>
+                    <select
+                        name="state"
+                        id="state"
                         class="form-control"
-                        name="zipcode"
-                        id="zipcode"
-                        v-model="form.zipcode"
-                        required
-                    />
+                        @change="onChangeState($event)"
+                    >
+                        <option value="0" disabled>SELECT A STATE</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="city">City</label>
+                    <select name="city" id="city" class="form-control" v-model="form.city_id">
+                        <option value="0" disabled>SELECT A City</option>
+                    </select>
                 </div>
 
                 <input
@@ -121,6 +147,8 @@ import { inject, reactive } from "vue";
 import { usePage } from "@inertiajs/inertia-vue3";
 import { Inertia } from "@inertiajs/inertia";
 
+const $ = require("jquery");
+window.$ = $;
 export default {
     name: "Register",
     components: {
@@ -138,20 +166,56 @@ export default {
             password_confirmation: null,
             phone: null,
             card_id: null,
-            zipcode: null,
+            country_id: null,
+            city_id: null,
             day_of_birth: null,
             _token: usePage().props.value.csrf_token,
         });
 
         const route = inject("$route");
 
+        const countries = usePage().props.value.countries;
+
         function submit() {
             Inertia.post(route("admin.store"), form);
         }
 
+        function onChangeCountry(event) {
+            $.get(`/ajax/states/${event.target.value}`, function (data) {
+                if (data.count == 0) {
+                    // No hay estados muestra la ciudades del pais
+
+                     $("#state")[0].innerHTML = "<OPTION>SELECT A STATE</OPTION>";
+
+                    showCities(0);
+                } else {
+                    $("#state")[0].innerHTML = data.html;
+                }
+            });
+        }
+
+        function onChangeState(event) {
+            
+            showCities(event.target.value);
+        }
+
+        function showCities(state_id) {
+            $.get(
+                `/ajax/cities/${form.country_id}/${state_id}`,
+                function (data) {
+                    $("#city")[0].innerHTML = data;
+                }
+            );
+        }
+
+        
+
         return {
             form,
             submit,
+            countries,
+            onChangeCountry,
+            onChangeState,
         };
     },
 };

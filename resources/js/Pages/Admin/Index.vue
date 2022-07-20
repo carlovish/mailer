@@ -15,8 +15,9 @@
                             <th>Email</th>
                             <th>Phone</th>
                             <th>Card Id</th>
-                            <th>Day of Birth</th>
-                            <th>Zip Code</th>
+                            <th>Date of Birth</th>
+                            <th>Age</th>
+                            <th>City</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -27,10 +28,13 @@
                             <td>{{ user.phone }}</td>
                             <td>{{ user.card_id }}</td>
                             <td>{{ user.day_of_birth }}</td>
-                            <td>{{ user.zipcode }}</td>
+                            <td>{{ getAge(user.day_of_birth)}}</td>
+                            <td>{{ user.city.name }}</td>
                             <td>
                                 <Link
-                                    :href="$route('admin.edit', { id: user.id })"
+                                    :href="
+                                        $route('admin.edit', { id: user.id })
+                                    "
                                     class="btn btn-primary pull-right action-btn"
                                     >Edit</Link
                                 >
@@ -41,7 +45,9 @@
                                     ><i class="fas fa-trash-alt"></i> Delete</a
                                 >
                                 <Link
-                                    :href="$route('showEmails', { id: user.id })"
+                                    :href="
+                                        $route('showEmails', { id: user.id })
+                                    "
                                     class="btn btn-primary pull-right action-btn"
                                     >View Emails</Link
                                 >
@@ -155,14 +161,20 @@ export default {
         };
 
         const users = computed(() => usePage().props.value.users);
-
+        console.log(users);
         const numberLinks = users.value.links.filter(
             (v, i) => i > 0 && i < users.value.links.length - 1
         );
 
+        const getAge =dateString=> {
+            var ageInMilliseconds = new Date() - new Date(dateString);
+            return Math.floor(ageInMilliseconds / 1000 / 60 / 60 / 24 / 365); // convert to years
+        }
+
         return {
             users,
             deleteUser,
+            getAge,
             numberLinks,
         };
     },

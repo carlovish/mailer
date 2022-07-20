@@ -54,4 +54,10 @@ class User extends Authenticatable
     {
         return $this->hasMany(Email::class);
     }
+
+    public function city()
+    {
+        return $this->belongsTo(City::class);
+    }
+
 }

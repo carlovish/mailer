@@ -24,7 +24,7 @@ class DatabaseSeeder extends Seeder
             'phone'=>'3335554171',
             'card_id'=>'525389232333',
             'day_of_birth'=>Carbon::parse('2000-01-01'),
-            'zipcode'=>553883,
+            'city_id'=>10,
             'role'=>'admin'
         ]);
     }

@@ -71,18 +71,6 @@
                     />
                 </div>
 
-                <div class="form-group">
-                    <label for="zipcode">City Code</label>
-                    <input
-                        type="number"
-                        class="form-control"
-                        name="zipcode"
-                        id="zipcode"
-                        v-model="form.zipcode"
-                        required
-                    />
-                </div>
-
                 <input type="submit" class="btn btn-primary btn-block" value="Update" />
             </form>
         </div>
@@ -110,7 +98,6 @@ export default {
             password: null,
             password_confirmation: null,
             phone: null,
-            zipcode: null,
             day_of_birth: null,
              _token: usePage().props.value.csrf_token,
             _method: "PUT"
@@ -123,7 +110,6 @@ export default {
         form.password_confirmation=password;
         form.phone=phone;
         form.day_of_birth=day_of_birth;
-        form.zipcode=zipcode;
 
         const route = inject('$route');
 

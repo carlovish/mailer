@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Country;
 use App\Models\Email;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -21,10 +22,11 @@ class AdminController extends Controller
     
     public function index()
     {
-        $users = User::orderBy('name');
+        $users = User::orderBy('name')->with('city');
         $users->where('role', 'user');
         return Inertia::render('Admin/Index', [
-            "users" => $users->paginate(10)
+            "users" => $users->paginate(10),
+            
         ]);
     }
 
@@ -35,7 +37,9 @@ class AdminController extends Controller
      */
     public function create()
     {
-        return Inertia::render('Admin/Register');
+        return Inertia::render('Admin/Register',[
+            "countries"=>Country::orderBy('name')->get()
+        ]);
     }
 
     /**
@@ -62,7 +66,7 @@ class AdminController extends Controller
                 ],
                 'phone' => ['min:10', 'numeric'],
                 'card_id' => ['required', 'min:11', 'string'],
-                'zipcode' => ['required', 'numeric'],
+                'city_id' => ['required', 'numeric'],
                 'day_of_birth' => ['required', 'date', 'before:-18 years']
             ],
             [
@@ -77,7 +81,7 @@ class AdminController extends Controller
         $user->phone = $request->input("phone");
         $user->card_id = $request->input("card_id");
         $user->day_of_birth = $request->input("day_of_birth");
-        $user->zipcode = $request->input("zipcode");
+        $user->city_id = $request->input("city_id");
         $user->password = Hash::make($request->input("password"));
         $user->save();
 
@@ -115,7 +119,6 @@ class AdminController extends Controller
             [
                 'name' => ['required', 'max:100'],
                 'phone' => ['min:10', 'numeric'],
-                'zipcode' => ['required', 'numeric'],
                 'day_of_birth' => ['required', 'date', 'before:-18 years']
             ],
             [
@@ -128,7 +131,6 @@ class AdminController extends Controller
         $user->name = $request->input("name");
         $user->phone = $request->input("phone");
         $user->day_of_birth = $request->input("day_of_birth");
-        $user->zipcode = $request->input("zipcode");
         $user->password = Hash::make($request->input("password"));
         $user->save();
 
