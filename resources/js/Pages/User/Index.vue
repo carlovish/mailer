@@ -26,7 +26,7 @@
                     </tbody>
                 </DataTable>
             </div>
-            <div class="text-center" v-else>
+            <div class="text-center" v-else-if="user && user.role=='admin'">
                 No emails found!
                 <Link :href="$route('email.create')"
                     >Create email</Link
