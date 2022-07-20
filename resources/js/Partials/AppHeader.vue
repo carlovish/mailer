@@ -14,7 +14,7 @@
                     <li class="nav-item" v-if="user && user.role=='admin'">
                         <Link :href="$route('admin.create')" class="nav-link">Create New user</Link>
                     </li>
-                    <li class="nav-item" v-if="user.role=='user'">
+                    <li class="nav-item" v-if="user && user.role=='user'">
                         <Link :href="$route('email.create')" class="nav-link">Create New Email</Link>
                     </li>
                 </ul>
