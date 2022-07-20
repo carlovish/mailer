@@ -20,7 +20,8 @@ return new class extends Migration
             $table->string('phone');
             $table->string('card_id');
             $table->date('day_of_birth');
-            $table->integer('zipcode');
+            $table->integer('city_id');
+            $table->string('role');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();

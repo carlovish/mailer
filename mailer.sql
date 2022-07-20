@@ -16,6 +16,60 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `cities`
+--
+
+DROP TABLE IF EXISTS `cities`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `cities` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `country_id` int(11) NOT NULL,
+  `state_id` int(11) DEFAULT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `cities`
+--
+
+LOCK TABLES `cities` WRITE;
+/*!40000 ALTER TABLE `cities` DISABLE KEYS */;
+INSERT INTO `cities` VALUES (1,3,1,'Miami','0000-00-00 00:00:00','0000-00-00 00:00:00'),(2,3,1,'Orlando',NULL,NULL),(3,3,1,'Tampa','0000-00-00 00:00:00','0000-00-00 00:00:00'),(4,3,2,'Houston','0000-00-00 00:00:00','0000-00-00 00:00:00'),(5,3,2,'Texas','0000-00-00 00:00:00','0000-00-00 00:00:00'),(6,3,2,'Dallas','0000-00-00 00:00:00','0000-00-00 00:00:00'),(8,5,5,'Distrito Federal','0000-00-00 00:00:00','0000-00-00 00:00:00'),(9,5,12,'Guadalajara','0000-00-00 00:00:00','0000-00-00 00:00:00'),(10,1,NULL,'La Habana',NULL,NULL);
+/*!40000 ALTER TABLE `cities` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `countries`
+--
+
+DROP TABLE IF EXISTS `countries`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `countries` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `countries`
+--
+
+LOCK TABLES `countries` WRITE;
+/*!40000 ALTER TABLE `countries` DISABLE KEYS */;
+INSERT INTO `countries` VALUES (1,'Cuba',NULL,NULL),(3,'Unite State of America',NULL,NULL),(4,'Ecuador',NULL,NULL),(5,'Mexico',NULL,NULL),(7,'Colombia',NULL,NULL),(9,'Argentina',NULL,NULL);
+/*!40000 ALTER TABLE `countries` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `emails`
 --
 
@@ -116,7 +170,7 @@ CREATE TABLE `migrations` (
   `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `batch` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=55 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=59 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -125,7 +179,7 @@ CREATE TABLE `migrations` (
 
 LOCK TABLES `migrations` WRITE;
 /*!40000 ALTER TABLE `migrations` DISABLE KEYS */;
-INSERT INTO `migrations` VALUES (30,'2022_07_16_074724_create_user_groups_table',1),(46,'2014_10_12_000000_create_users_table',2),(47,'2014_10_12_100000_create_password_resets_table',2),(48,'2019_08_19_000000_create_failed_jobs_table',2),(49,'2019_12_14_000001_create_personal_access_tokens_table',2),(50,'2022_07_18_080411_create_roles_table',2),(51,'2022_07_18_080506_create_role_user_table',2),(52,'2022_07_18_101540_add_role_column_to_users',2),(53,'2022_07_19_090925_create_emails_table',3),(54,'2022_07_19_122816_create_jobs_table',4);
+INSERT INTO `migrations` VALUES (30,'2022_07_16_074724_create_user_groups_table',1),(46,'2014_10_12_000000_create_users_table',2),(47,'2014_10_12_100000_create_password_resets_table',2),(48,'2019_08_19_000000_create_failed_jobs_table',2),(49,'2019_12_14_000001_create_personal_access_tokens_table',2),(50,'2022_07_18_080411_create_roles_table',2),(51,'2022_07_18_080506_create_role_user_table',2),(52,'2022_07_18_101540_add_role_column_to_users',2),(53,'2022_07_19_090925_create_emails_table',3),(54,'2022_07_19_122816_create_jobs_table',4),(55,'2022_07_19_152352_create_countries_table',5),(56,'2022_07_19_152406_create_states_table',5),(57,'2022_07_19_152422_create_cities_table',5),(58,'2022_07_19_154815_add_city_id_to_users_table',5);
 /*!40000 ALTER TABLE `migrations` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -238,6 +292,33 @@ LOCK TABLES `roles` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `states`
+--
+
+DROP TABLE IF EXISTS `states`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `states` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `country_id` int(11) NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `states`
+--
+
+LOCK TABLES `states` WRITE;
+/*!40000 ALTER TABLE `states` DISABLE KEYS */;
+INSERT INTO `states` VALUES (1,3,'Florida',NULL,NULL),(2,3,'Texas',NULL,NULL),(3,3,'Indiana',NULL,NULL),(5,3,'Luisiana',NULL,NULL),(7,3,'Colorado',NULL,NULL),(9,3,'California',NULL,NULL),(11,5,'Ciudad de Mexico',NULL,NULL),(12,5,'Jalisco',NULL,NULL),(13,5,'Michoacan',NULL,NULL),(14,5,'Yucatan',NULL,NULL);
+/*!40000 ALTER TABLE `states` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `users`
 --
 
@@ -251,7 +332,7 @@ CREATE TABLE `users` (
   `phone` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `card_id` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `day_of_birth` date NOT NULL,
-  `zipcode` int(11) NOT NULL,
+  `city_id` int(11) NOT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
   `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -260,7 +341,7 @@ CREATE TABLE `users` (
   `role` enum('user','admin') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'user',
   PRIMARY KEY (`id`),
   UNIQUE KEY `users_email_unique` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -269,7 +350,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'Carlos','carlos@mail.com','3335554171','5253892','2000-01-01',553883,NULL,'$2y$10$FTNbflcTODF4ge8Ezsu2DO793QfFrMi5kW.7ZbYBl379WdYrswZUa',NULL,NULL,NULL,'admin'),(2,'Manuel','manuel@mail.com','222555888','335588889','2001-06-04',111122,NULL,'$2y$10$GmcKsZrEypWsBOLQaF1oDON3zSDateZ1xJHPzgpoc0lGZ/LWS2Fb2',NULL,'2022-07-18 12:42:55','2022-07-19 08:00:01','user'),(10,'Raul','raul@mail.com','3335554171','525389232333','2000-01-01',553880,NULL,'$2y$10$648N85mPishSCTMn2psoNu01uKa.ihuIAqELkQ4tkb5Dl4mSYfZ/a',NULL,NULL,'2022-07-19 07:55:22','user');
+INSERT INTO `users` VALUES (1,'Carlos','carlos@mail.com','3335554171','5253892','2000-01-01',10,NULL,'$2y$10$FTNbflcTODF4ge8Ezsu2DO793QfFrMi5kW.7ZbYBl379WdYrswZUa',NULL,NULL,NULL,'admin'),(2,'Manuel','manuel@mail.com','222555888','335588889','2001-06-04',1,NULL,'$2y$10$GmcKsZrEypWsBOLQaF1oDON3zSDateZ1xJHPzgpoc0lGZ/LWS2Fb2',NULL,'2022-07-18 12:42:55','2022-07-19 08:00:01','user'),(10,'Raul','raul@mail.com','3335554171','525389232333','2000-01-01',5,NULL,'$2y$10$648N85mPishSCTMn2psoNu01uKa.ihuIAqELkQ4tkb5Dl4mSYfZ/a',NULL,NULL,'2022-07-19 07:55:22','user'),(12,'Rosa','rosa@mail.com','222409562','665485558444','1995-01-01',2,NULL,'$2y$10$zVRpyiogz54IJ0/IlnSVaOzy09hN7SDaiDg5AkYFqvglDuR/7V8Va',NULL,'2022-07-20 10:32:44','2022-07-20 10:32:44','user');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -282,4 +363,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-07-19 16:38:12
+-- Dump completed on 2022-07-20 13:43:56
