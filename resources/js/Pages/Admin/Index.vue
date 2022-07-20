@@ -124,8 +124,8 @@
             </div>
             <div class="text-center" v-else>
                 No users found!
-                <inertia-link :href="$route('admin.create')"
-                    >Create user</inertia-link
+                <Link :href="$route('admin.create')"
+                    >Create user</Link
                 >
             </div>
         </div>
